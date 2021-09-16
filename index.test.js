@@ -48,7 +48,7 @@ describe('[Exercise 3] findLargestInteger', () => {
 describe('[Exercise 4] Counter', () => {
   let counter
   beforeEach(() => {
-    counter = new utils.Counter(3) // each test must start with a fresh couter
+    counter = new utils.Counter(3)
   })
   test('[6] the FIRST CALL of counter.countDown returns the initial count',
       () => {
@@ -72,7 +72,7 @@ describe('[Exercise 4] Counter', () => {
 describe('[Exercise 5] Seasons', () => {
   let seasons
   beforeEach(() => {
-    seasons = new utils.Seasons() // each test must start with fresh seasons
+    seasons = new utils.Seasons()
   })
    test('[9] the FIRST call of seasons.next returns "summer"',
        () => {
@@ -117,12 +117,22 @@ describe('[Exercise 5] Seasons', () => {
 describe('[Exercise 6] Car', () => {
   let focus
   beforeEach(() => {
-    focus = new utils.Car('focus', 20, 30) // each test must start with a fresh car
+    focus = new utils.Car('focus', 20, 30)
   })
-  // test('[15] driving the car returns the updated odometer', () => {})
-  // test('[16] driving the car uses gas', () => {})
-  // test('[17] refueling allows to keep driving', () => {})
-  // test('[18] adding fuel to a full tank has no effect', () => {})
+    test("[15] driving the car returns the updated odometer", () => {
+        expect(focus.drive(100)).toBe(100);
+    });
+    test("[16] driving the car uses gas", () => {
+        expect(focus.drive(600)).toBe(600);
+        expect(focus.drive(800)).not.toBe(800);
+    });
+    test("[17] refueling allows to keep driving", () => {
+        focus.drive(600);
+        expect(focus.refuel(10)).toBe(300);
+    });
+    test("[18] adding fuel to a full tank has no effect", () => {
+        expect(focus.refuel(99)).toBe(600);
+    });
 })
 
 describe('[Exercise 7] isEvenNumberAsync', () => {
