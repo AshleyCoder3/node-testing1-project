@@ -1,4 +1,5 @@
 const utils = require('./index')
+const {isEvenNumberAsync} = require("./index");
 
 describe('[Exercise 1] trimProperties', () => {
   test('[1] returns an object with the properties trimmed', () => {
@@ -23,7 +24,7 @@ describe('[Exercise 2] trimPropertiesMutation', () => {
       () => {
           const input = { foo: '  foo ', bar: 'bar ', baz: ' baz' }
           const expected = { foo: 'foo', bar: 'bar', baz: 'baz' }
-          const actual = utils.trimProperties(input)
+          const actual = utils.trimPropertiesMutation(input)
           expect(actual).toEqual(expected)
       })
   test('[4] the object returned is the exact same one we passed in',
@@ -49,9 +50,23 @@ describe('[Exercise 4] Counter', () => {
   beforeEach(() => {
     counter = new utils.Counter(3) // each test must start with a fresh couter
   })
-  // test('[6] the FIRST CALL of counter.countDown returns the initial count', () => {})
-  // test('[7] the SECOND CALL of counter.countDown returns the initial count minus one', () => {})
-  // test('[8] the count eventually reaches zero but does not go below zero', () => {})
+  test('[6] the FIRST CALL of counter.countDown returns the initial count',
+      () => {
+      expect(counter.countDown()).toBe(3)
+      })
+  test('[7] the SECOND CALL of counter.countDown returns the initial count minus one',
+      () => {
+          counter.countDown()
+      expect(counter.countDown()).toEqual(2)
+      })
+  test('[8] the count eventually reaches zero but does not go below zero',
+      () => {
+      counter.countDown()
+          counter.countDown()
+          counter.countDown()
+          counter.countDown()
+          expect(counter.countDown()).toEqual(0)
+      })
 })
 
 describe('[Exercise 5] Seasons', () => {
@@ -59,12 +74,44 @@ describe('[Exercise 5] Seasons', () => {
   beforeEach(() => {
     seasons = new utils.Seasons() // each test must start with fresh seasons
   })
-  // test('[9] the FIRST call of seasons.next returns "summer"', () => {})
-  // test('[10] the SECOND call of seasons.next returns "fall"', () => {})
-  // test('[11] the THIRD call of seasons.next returns "winter"', () => {})
-  // test('[12] the FOURTH call of seasons.next returns "spring"', () => {})
-  // test('[13] the FIFTH call of seasons.next returns again "summer"', () => {})
-  // test('[14] the 40th call of seasons.next returns "spring"', () => {})
+   test('[9] the FIRST call of seasons.next returns "summer"',
+       () => {
+
+       expect(seasons.next()).toEqual('summer')
+       })
+   test('[10] the SECOND call of seasons.next returns "fall"',
+       () => {
+       seasons.next()
+           expect(seasons.next()).toEqual('fall')
+       })
+   test('[11] the THIRD call of seasons.next returns "winter"',
+       () => {
+           seasons.next()
+           seasons.next()
+           expect(seasons.next()).toEqual('winter')
+       })
+   test('[12] the FOURTH call of seasons.next returns "spring"',
+       () => {
+           seasons.next()
+           seasons.next()
+           seasons.next()
+           expect(seasons.next()).toEqual('spring')
+       })
+   test('[13] the FIFTH call of seasons.next returns again "summer"',
+       () => {
+           seasons.next()
+           seasons.next()
+           seasons.next()
+           seasons.next()
+           expect(seasons.next()).toEqual('summer')
+       })
+   test('[14] the 40th call of seasons.next returns "spring"',
+       () => {
+           for (let i = 0; i < 39; i++) {
+               seasons.next();
+           }
+           expect(seasons.next()).toEqual("spring");
+       })
 })
 
 describe('[Exercise 6] Car', () => {
@@ -79,6 +126,14 @@ describe('[Exercise 6] Car', () => {
 })
 
 describe('[Exercise 7] isEvenNumberAsync', () => {
-  // test('[19] resolves true if passed an even number', () => {})
-  // test('[20] resolves false if passed an odd number', () => {})
+   test('[19] resolves true if passed an even number',
+       async () => {
+       const number = await isEvenNumberAsync(10)
+       expect(number).toBe(true)
+       })
+   test('[20] resolves false if passed an odd number',
+       async () => {
+           const number = await isEvenNumberAsync(9)
+           expect(number).toBe(false)
+       })
 })

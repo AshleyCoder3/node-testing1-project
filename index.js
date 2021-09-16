@@ -1,91 +1,58 @@
-/**
- * [Exercise 1] trimProperties copies an object trimming its properties
- * @param {object} obj - an object with properties that are strings
- * @returns {object} - a copy of the object with strings trimmed
- *
- * EXAMPLE
- * trimProperties({ name: '  jane  ' }) // returns a new object { name: 'jane' }
- */
+
 function trimProperties(obj) {
 let newObject = Object.assign({}, obj)
   Object.keys(newObject).map(keyForObject => newObject[keyForObject] = newObject[keyForObject].trim())
   return newObject
 }
 
-/**
- * [Exercise 2] trimPropertiesMutation trims in place the properties of an object
- * @param {object} obj - an object with properties that are strings
- * @returns {object} - the same object with strings trimmed
- *
- * EXAMPLE
- * trimPropertiesMutation({ name: '  jane  ' }) // returns the object mutated in place { name: 'jane' }
- */
 function trimPropertiesMutation(obj) {
   Object.keys(obj).map(keyForObject => obj[keyForObject] = obj[keyForObject].trim())
   return obj
 }
 
-/**
- * [Exercise 3] findLargestInteger finds the largest integer in an array of objects { integer: 1 }
- * @param {object[]} integers - an array of objects
- * @returns {number} - the largest integer
- *
- * EXAMPLE
- * findLargestInteger([{ integer: 1 }, { integer: 3 }, { integer: 2 }]) // returns 3
- */
 function findLargestInteger(integers) {
-
-
+  let bigNum = 0
+  for (let i = 0; i < integers.length; i++) {
+    if(integers[i].integer > bigNum){
+      bigNum = integers[i].integer
+    }
+  }
+  return bigNum
 }
 
 class Counter {
-  /**
-   * [Exercise 4A] Counter creates a counter
-   * @param {number} initialNumber - the initial state of the count
-   */
   constructor(initialNumber) {
-    // ✨ initialize whatever properties are needed
+    this.counter = initialNumber
   }
-
-  /**
-   * [Exercise 4B] Counter.prototype.countDown counts down to zero
-   * @returns {number} - the next count, does not go below zero
-   *
-   * EXAMPLE
-   * const counter = new Counter(3)
-   * counter.countDown() // returns 3
-   * counter.countDown() // returns 2
-   * counter.countDown() // returns 1
-   * counter.countDown() // returns 0
-   * counter.countDown() // returns 0
-   */
   countDown() {
-    // ✨ implement
+   if (this.counter <=0){
+     return this.counter
+   }else{
+     return this.counter--
+   }
   }
 }
 
 class Seasons {
-  /**
-   * [Exercise 5A] Seasons creates a seasons object
-   */
   constructor() {
-    // ✨ initialize whatever properties are needed
+    this.seasons=[
+       'summer',
+        'fall',
+        'winter',
+        'spring'
+    ]
+    this.current = this.seasons[3]
   }
-
-  /**
-   * [Exercise 5B] Seasons.prototype.next returns the next season
-   * @returns {string} - the next season starting with "summer"
-   *
-   * EXAMPLE
-   * const seasons = new Seasons()
-   * seasons.next() // returns "summer"
-   * seasons.next() // returns "fall"
-   * seasons.next() // returns "winter"
-   * seasons.next() // returns "spring"
-   * seasons.next() // returns "summer"
-   */
   next() {
-    // ✨ implement
+    for (let i = 0; i < this.seasons.length ; i++) {
+      if(this.current === 'spring'){
+        this.current = this.seasons[0]
+     return this.current
+      } else if (this.seasons[i] === this.current){
+        this.current = this.seasons[i + 1]
+        return this.current
+      }
+    }
   }
 }
 
@@ -135,21 +102,9 @@ class Car {
   }
 }
 
-/**
- * [Exercise 7] Asynchronously resolves whether a number is even
- * @param {number} number - the number to test for evenness
- * @returns {promise} - resolves true if number even, false otherwise
- *
- * EXAMPLE
- * isEvenNumberAsync(2).then(result => {
- *    // result is true
- * })
- * isEvenNumberAsync(3).then(result => {
- *    // result is false
- * })
- */
+
 function isEvenNumberAsync(number) {
-  // ✨ implement
+  return number % 2 === 0
 }
 
 module.exports = {
